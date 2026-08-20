@@ -164,8 +164,8 @@ btnPay.addEventListener('click', async () => {
     const res = await api.payAndHelp(context);
     const inner = res && res.ok ? res.data : null;
     if (inner && inner.ok) {
-      showActiveSession('Paiement reçu. Le technicien FIX72 a votre demande et va prendre la main.');
-      toast('Session ouverte ✅ Le technicien arrive.', 'ok', 6000);
+      showActiveSession('Paiement reçu. La prise en main démarre automatiquement — restez sur cet écran.');
+      toast('Session ouverte ✅ La prise en main automatique démarre.', 'ok', 6000);
     } else {
       const err = (inner && inner.error) || (res && res.error) || 'inconnu';
       if (err === 'payment_cancelled') {
@@ -224,7 +224,7 @@ refreshSessionState();
 setInterval(refreshSessionState, 8000);
 
 // Ouverture pilotée depuis l'admin (le technicien ouvre le canal) → bascule l'UI.
-if (api.onRemoteOpenChannel) api.onRemoteOpenChannel(() => { showActiveSessionSilently(); toast('Le technicien FIX72 ouvre une session sécurisée…', 'info', 6000); });
+if (api.onRemoteOpenChannel) api.onRemoteOpenChannel(() => { showActiveSessionSilently(); toast('Prise en main automatique FIX72 en cours…', 'info', 6000); });
 if (api.onRemoteCloseChannel) api.onRemoteCloseChannel(() => { showIdleSession(); });
 
 // --- Chat -------------------------------------------------------------------
