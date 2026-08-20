@@ -1,0 +1,5 @@
+{
+  "Endpoint": "https://eus.codesigning.azure.net/",
+  "CodeSigningAccountName": "fix72signing2",
+  "CertificateProfileName": "REMPLACER_APRES_VALIDATION"
+}
