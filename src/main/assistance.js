@@ -184,9 +184,15 @@ function sessionState() {
   return { channelActive, badge };
 }
 
-// --- Notification Telegram à Etienne ----------------------------------------
-const TG_TOKEN = '8837615366:AAGEmPQaO1jRCC0J9tC5y-OuFXiv-G6StVg';
-const TG_CHAT = '7121042851';
+// --- Notification Telegram à Etienne (via RELAIS serveur) -------------------
+// ⚠️ Le token du bot n'est PLUS embarqué dans l'app (il finissait dans le repo
+// public / l'exe distribué = extractible). On passe par l'Edge Function
+// `tg-notify` (projet ordi-facile) qui détient le token en secret serveur
+// (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID). L'app n'envoie que le texte, avec la
+// clé anon (publique par nature, protégée par RLS/verify_jwt).
+const TG_RELAY = 'https://lujumnqloorlbjyffylb.supabase.co/functions/v1/tg-notify';
+const TG_RELAY_ANON =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1anVtbnFsb29ybGJqeWZmeWxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNDE2NTcsImV4cCI6MjA5MDkxNzY1N30.MWc-mW777_Jcd4-Nk3chmrkNK7upS4olIo-OXVEBwTU';
 
 function tgEscape(s) {
   return String(s == null ? '' : s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
@@ -194,10 +200,10 @@ function tgEscape(s) {
 
 async function notifyTelegram(text) {
   try {
-    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    await fetch(TG_RELAY, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: 'HTML', disable_web_page_preview: true }),
+      headers: { apikey: TG_RELAY_ANON, Authorization: 'Bearer ' + TG_RELAY_ANON, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
     });
   } catch (_) {}
 }

@@ -1,6 +1,6 @@
 {
   "name": "fix72-recup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "FIX72 Récup Compte - assistance à la récupération de comptes Facebook / Google piratés (prise en main à distance).",
   "author": "FIX72",
   "main": "src/main/main.js",
