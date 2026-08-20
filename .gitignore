@@ -1,0 +1,19 @@
+# Dépendances
+node_modules/
+
+# Build
+dist/
+
+# Secrets — NE JAMAIS committer
+.env
+build/*.pfx
+build/*.cer
+
+# Trusted Signing : dépendances récupérées localement (pas dans le repo)
+build/trusted-signing/*.dll
+build/trusted-signing/*.json.user
+
+# Logs temporaires
+*.log
+err.log
+out.log

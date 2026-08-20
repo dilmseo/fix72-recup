@@ -1,0 +1,53 @@
+{
+  "name": "fix72-recup",
+  "version": "1.0.0",
+  "description": "FIX72 Récup Compte - assistance à la récupération de comptes Facebook / Google piratés (prise en main à distance).",
+  "author": "FIX72",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "pack": "electron-builder --dir"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.fix72.recup",
+    "productName": "FIX72 Recup Compte",
+    "artifactName": "FIX72-Recup-Compte-Setup.${ext}",
+    "copyright": "Copyright © FIX72",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "build/icon.ico",
+      "!**/*.map"
+    ],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] }
+      ],
+      "requestedExecutionLevel": "requireAdministrator",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "FIX72 Recup Compte",
+      "include": "build/installer.nsh"
+    },
+    "publish": [
+      { "provider": "github", "owner": "dilmseo", "repo": "fix72-recup", "releaseType": "release" }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
+  }
+}

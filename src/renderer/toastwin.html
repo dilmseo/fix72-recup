@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --txt:#eaf0fb; --ok:#33d98a; --danger:#f56368; --accent:#2f7cf6; --accent2:#3dd7c8; --line-2:rgba(255,255,255,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:transparent;overflow:hidden}
+  body{font-family:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;color:var(--txt);
+    display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;gap:10px;padding:12px;pointer-events:none;user-select:none}
+  i{display:inline-block;width:16px;height:16px;background:currentColor;flex:none;
+    -webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+  .toast{position:relative;display:flex;align-items:center;gap:12px;overflow:hidden;width:100%;pointer-events:auto;cursor:default;
+    background:rgba(18,25,48,.98);border:1px solid var(--line-2);padding:11px 12px 11px 14px;border-radius:14px;font-size:14px;line-height:1.35;
+    box-shadow:0 22px 50px -18px rgba(0,0,0,.85),0 0 0 1px rgba(0,0,0,.25);
+    opacity:0;transform:translateX(40px) scale(.96);transition:opacity .28s ease,transform .34s cubic-bezier(.34,1.56,.55,1)}
+  .toast.show{opacity:1;transform:translateX(0) scale(1)}
+  .toast.hide{opacity:0;transform:translateX(40px) scale(.97);transition:.22s ease}
+  .toast::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--acc,var(--accent2))}
+  .toast-ic{flex:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;
+    color:var(--acc,var(--accent2));background:color-mix(in srgb,var(--acc,var(--accent2)) 16%,transparent);
+    box-shadow:0 0 14px -4px var(--acc,var(--accent2))}
+  .toast-ic i{width:17px;height:17px}
+  .toast-txt{flex:1;min-width:0;padding-right:2px}
+  .toast-title{font-weight:600;margin-bottom:1px}
+  .toast-msg{color:#cdd7ee;font-size:13.5px}
+  .toast-btn{flex:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;
+    border:1px solid transparent;background:transparent;cursor:pointer;transition:.16s ease;padding:0;color:inherit}
+  .toast-btn i{width:16px;height:16px}
+  .toast-btn:active{transform:scale(.9)}
+  .toast-open{color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,transparent);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+  .toast-open:hover{color:#fff;background:var(--accent);box-shadow:0 4px 14px -3px var(--accent)}
+  .toast-close{color:var(--danger);background:color-mix(in srgb,var(--danger) 14%,transparent);border-color:color-mix(in srgb,var(--danger) 32%,transparent)}
+  .toast-close:hover{color:#fff;background:var(--danger);box-shadow:0 4px 14px -3px var(--danger)}
+  .toast-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;transform-origin:left;
+    background:var(--acc,var(--accent2));opacity:.55;animation:bar linear forwards}
+  @keyframes bar{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+</style>
+</head>
+<body>
+<script>
+const ICONS = {
+  check: 'M20 6L9 17l-5-5',
+  alert: 'M12 3l10 18H2zM12 9v5M12 17v.5',
+  info: 'M12 3a9 9 0 100 18 9 9 0 000-18zM12 11v5M12 7.6v.4',
+  close: 'M6 6l12 12M18 6L6 18',
+  plus: 'M12 5v14M5 12h14',
+};
+function svgMask(d) {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='${d}'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+const KINDS = {
+  success: { icon: 'check', acc: 'var(--ok)' },
+  error: { icon: 'alert', acc: 'var(--danger)' },
+  info: { icon: 'info', acc: 'var(--accent2)' },
+};
+function kindOf(txt) {
+  // Erreur d'abord : « désactivé » contient « activ », etc.
+  if (/désactiv|non protégé|échec|erreur|\bproblème|impossible|introuvable|expir|hors ligne|échou|refus/i.test(txt)) return 'error';
+  if (/aucune menace|✓|\bactiv[ée]|terminé|à jour|\bprotégé|réussi|connecté|en ligne|nettoy|résolu|sécurisé/i.test(txt)) return 'success';
+  return 'info';
+}
+function ico(name) {
+  const i = document.createElement('i');
+  i.style.setProperty('--ic', svgMask(ICONS[name]));
+  return i;
+}
+
+let hovered = 0;
+function refreshInteractive() { window.toastwin.setInteractive(hovered > 0); }
+function maybeEmpty() { if (!document.querySelector('.toast')) window.toastwin.empty(); }
+
+function addToast({ title, body, goto, kind }) {
+  const full = (title || '') + ' ' + (body || '');
+  const { icon, acc } = KINDS[kind] || KINDS[kindOf(full)];
+  const dur = 10000;
+
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.style.setProperty('--acc', acc);
+
+  const ic = document.createElement('span');
+  ic.className = 'toast-ic';
+  ic.appendChild(ico(icon));
+
+  const txt = document.createElement('div');
+  txt.className = 'toast-txt';
+  if (title) {
+    const t = document.createElement('div');
+    t.className = 'toast-title';
+    t.textContent = title;
+    txt.appendChild(t);
+  }
+  const m = document.createElement('div');
+  m.className = 'toast-msg';
+  m.textContent = body || '';
+  txt.appendChild(m);
+
+  const open = document.createElement('button');
+  open.className = 'toast-btn toast-open';
+  open.title = "Ouvrir l'application";
+  open.appendChild(ico('plus'));
+
+  const close = document.createElement('button');
+  close.className = 'toast-btn toast-close';
+  close.title = 'Fermer';
+  close.appendChild(ico('close'));
+
+  const bar = document.createElement('span');
+  bar.className = 'toast-bar';
+  bar.style.animationDuration = dur + 'ms';
+
+  el.append(ic, txt, open, close, bar);
+  document.body.appendChild(el);
+
+  const dismiss = () => {
+    if (el._gone) return;
+    el._gone = true;
+    clearTimeout(el._h);
+    el.classList.add('hide');
+    setTimeout(() => { el.remove(); maybeEmpty(); }, 300);
+  };
+  close.addEventListener('click', (e) => { e.stopPropagation(); dismiss(); });
+  open.addEventListener('click', (e) => { e.stopPropagation(); window.toastwin.open(goto); dismiss(); });
+  el.addEventListener('mouseenter', () => { hovered++; refreshInteractive(); clearTimeout(el._h); bar.style.animationPlayState = 'paused'; });
+  el.addEventListener('mouseleave', () => { hovered = Math.max(0, hovered - 1); refreshInteractive(); bar.style.animationPlayState = 'running'; el._h = setTimeout(dismiss, 2500); });
+
+  requestAnimationFrame(() => el.classList.add('show'));
+  el._h = setTimeout(dismiss, dur);
+
+  // Limite à 4 toasts visibles.
+  while (document.querySelectorAll('.toast').length > 4) document.querySelector('.toast').remove();
+}
+
+window.toastwin.onToast(addToast);
+</script>
+</body>
+</html>

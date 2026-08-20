@@ -1,0 +1,18 @@
+/* Étapes de guide (récupération) */
+.guide{display:flex;flex-direction:column;gap:12px}
+.step{display:flex;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px;transition:.16s}
+.step:hover{border-color:var(--line-2);background:var(--panel-2)}
+.step-n{flex:none;width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:15px;color:#04122b;background:var(--grad);box-shadow:0 6px 16px -8px rgba(47,124,246,.9)}
+.step-body{flex:1;min-width:0}
+.step-body b{font-size:15px;display:block;margin-bottom:4px}
+.step-body p{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0 0 10px}
+.step-actions{display:flex;flex-wrap:wrap;gap:9px}
+.step-actions .btn{font-size:13px;padding:8px 14px}
+.step-tip{font-size:12.5px;color:var(--accent2);background:var(--grad-soft);border:1px solid rgba(61,215,200,.28);
+  border-radius:10px;padding:8px 12px;margin-top:10px;line-height:1.5}
+.step-tip b{color:var(--txt)}
+
+/* Icône plateforme de la tuile d'accueil : garder la couleur d'accent */
+.qt-ic i{width:22px;height:22px}
+h3{margin-top:26px}

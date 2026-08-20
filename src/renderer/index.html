@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'" />
+  <title>FIX72 Récup Compte</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="recup.css" />
+</head>
+<body>
+  <!-- Écran de démarrage -->
+  <div id="splash">
+    <div class="splash-inner">
+      <div class="splash-logo"><img src="assets/logo.png" width="86" height="86" alt="" /></div>
+      <div class="splash-word">FIX72 <b>Récup Compte</b></div>
+      <div class="splash-tag">Récupération de comptes</div>
+      <div class="splash-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- Barre de titre -->
+  <div class="titlebar">
+    <div class="tb-brand">
+      <img class="tb-logo" src="assets/logo.png" alt="" />
+      <b>FIX72</b> <span>Récup Compte</span>
+    </div>
+    <div class="tb-controls">
+      <button class="tb-btn" id="tb-min" title="Réduire"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="5.5" width="10" height="1.2"/></svg></button>
+      <button class="tb-btn" id="tb-max" title="Agrandir"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+      <button class="tb-btn tb-close" id="tb-close" title="Fermer"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.3"/></svg></button>
+    </div>
+  </div>
+
+  <div id="app">
+    <!-- Menu latéral -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-logo"><img src="assets/logo.png" width="34" height="34" alt="" /></span>
+        <span class="brand-text"><b>Récup Compte</b><span>par FIX72</span></span>
+      </div>
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard"><i data-i="home"></i> Accueil</button>
+        <button class="nav-item" data-view="facebook"><i data-i="facebook"></i> Compte Facebook</button>
+        <button class="nav-item" data-view="google"><i data-i="google"></i> Compte Google</button>
+        <button class="nav-item" data-view="autres"><i data-i="grid"></i> Autres comptes</button>
+        <button class="nav-item" data-view="assistance"><i data-i="headset"></i> Être aidé (15 €)</button>
+        <button class="nav-item" data-view="chat"><i data-i="send"></i> Discuter</button>
+        <button class="nav-item nav-license" data-view="about"><i data-i="info"></i> À propos</button>
+      </nav>
+      <div class="sidebar-foot">
+        <a href="tel:0751133769" class="ad-phone" style="margin:0 0 8px">
+          <span class="ad-phone-ic"><i data-i="phone"></i></span>
+          <span class="ad-phone-txt"><b>07 51 13 37 69</b><small>Un souci ? Appelez-nous</small></span>
+        </a>
+        <div class="ver">Version <span id="app-ver">—</span></div>
+      </div>
+    </aside>
+
+    <!-- Contenu -->
+    <main class="content">
+
+      <!-- ACCUEIL -->
+      <section class="view active" id="view-dashboard">
+        <div class="dash-greet"><h2 class="dash-greet-txt">Bonjour<span class="greet-name" id="greet-name"></span></h2></div>
+        <div class="hero state-ok">
+          <div class="hero-ring">
+            <svg class="ring" width="126" height="126" viewBox="0 0 120 120">
+              <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3dd7c8"/><stop offset="1" stop-color="#2f7cf6"/></linearGradient></defs>
+              <circle class="ring-bg" cx="60" cy="60" r="52"/>
+              <circle class="ring-fg" cx="60" cy="60" r="52" style="stroke-dashoffset:60"/>
+            </svg>
+            <div class="hero-icon"><i data-i="unlock" style="width:44px;height:44px"></i></div>
+          </div>
+          <div class="hero-text">
+            <div class="hero-eyebrow">COMPTE PIRATÉ OU PERDU ?</div>
+            <h1>On récupère votre accès</h1>
+            <p>Facebook, Google, Instagram, Outlook… Choisissez votre situation : on vous guide pas à pas, et si besoin un technicien FIX72 prend la main à distance.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-goto="assistance"><i data-i="headset"></i> Être aidé — 15 €</button>
+              <button class="btn" data-goto="facebook"><i data-i="doc"></i> Guides gratuits</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-h">Quel compte voulez-vous récupérer ?</div>
+        <div class="quick-grid">
+          <button class="quick-tile" data-goto="facebook"><span class="qt-ic"><i data-i="facebook"></i></span><b>Facebook</b><span class="qt-sub">Compte piraté, mot de passe changé, e-mail modifié</span></button>
+          <button class="quick-tile" data-goto="google"><span class="qt-ic"><i data-i="google"></i></span><b>Google / Gmail</b><span class="qt-sub">Accès perdu, 2FA, e-mail de récupération</span></button>
+          <button class="quick-tile" data-goto="autres"><span class="qt-ic"><i data-i="instagram"></i></span><b>Instagram</b><span class="qt-sub">Compte volé, connexion impossible</span></button>
+          <button class="quick-tile" data-goto="autres"><span class="qt-ic"><i data-i="mail"></i></span><b>Outlook / Microsoft</b><span class="qt-sub">Boîte mail bloquée ou piratée</span></button>
+        </div>
+
+        <button class="dash-assist" data-goto="assistance">
+          <span class="dash-assist-ic"><i data-i="headset"></i></span>
+          <span class="dash-assist-body">
+            <b>Vous préférez qu'on s'en occupe ? <span class="dash-assist-tag">Forfait unique 15 €</span></b>
+            <span class="dash-assist-sub">Un technicien FIX72 se connecte à votre écran (avec votre accord) et déroule la procédure officielle de récupération avec vous. Sans garantie de résultat, mais on fait le maximum.</span>
+          </span>
+          <span class="dash-assist-cta"><i data-i="unlock"></i> Démarrer</span>
+        </button>
+      </section>
+
+      <!-- FACEBOOK -->
+      <section class="view" id="view-facebook">
+        <h1>Récupérer un compte Facebook</h1>
+        <p class="muted">Suivez ces étapes officielles dans l'ordre. À chaque étape, le bouton ouvre directement la bonne page Facebook dans votre navigateur.</p>
+        <div class="scan-intro">
+          <span class="scan-intro-ic"><i data-i="alert"></i></span>
+          <div class="scan-intro-txt">
+            <b>Avant de commencer</b>
+            <div class="muted">Ayez sous la main : l'adresse e-mail ou le numéro de téléphone du compte, et si possible un ancien mot de passe. Agissez vite : plus c'est récent, plus c'est facile.</div>
+          </div>
+        </div>
+        <div class="guide" id="guide-facebook"></div>
+        <button class="dash-assist" data-goto="assistance" style="margin-top:22px">
+          <span class="dash-assist-ic"><i data-i="headset"></i></span>
+          <span class="dash-assist-body"><b>Bloqué à une étape ?</b><span class="dash-assist-sub">On prend la main à distance et on le fait avec vous — 15 €.</span></span>
+          <span class="dash-assist-cta"><i data-i="unlock"></i> Être aidé</span>
+        </button>
+      </section>
+
+      <!-- GOOGLE -->
+      <section class="view" id="view-google">
+        <h1>Récupérer un compte Google / Gmail</h1>
+        <p class="muted">Le formulaire de récupération Google s'adapte à vos réponses. Répondez au mieux, même approximativement — chaque bonne réponse augmente vos chances.</p>
+        <div class="scan-intro">
+          <span class="scan-intro-ic"><i data-i="alert"></i></span>
+          <div class="scan-intro-txt">
+            <b>Conseils qui marchent</b>
+            <ul class="scan-intro-list">
+              <li>Faites la demande depuis un <b>appareil et un lieu habituels</b> (ordi/téléphone déjà utilisé pour ce compte).</li>
+              <li>Indiquez un <b>ancien mot de passe</b> dont vous vous souvenez, même ancien.</li>
+              <li>Essayez à un <b>moment où vous êtes calme</b> : Google peut demander de réessayer plus tard.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="guide" id="guide-google"></div>
+        <button class="dash-assist" data-goto="assistance" style="margin-top:22px">
+          <span class="dash-assist-ic"><i data-i="headset"></i></span>
+          <span class="dash-assist-body"><b>Formulaire refusé plusieurs fois ?</b><span class="dash-assist-sub">On analyse votre cas et on relance la procédure avec vous — 15 €.</span></span>
+          <span class="dash-assist-cta"><i data-i="unlock"></i> Être aidé</span>
+        </button>
+      </section>
+
+      <!-- AUTRES -->
+      <section class="view" id="view-autres">
+        <h1>Autres comptes</h1>
+        <p class="muted">Instagram, Outlook/Microsoft et les autres services. Mêmes principes : passer par la récupération officielle, prouver son identité.</p>
+        <h3>Instagram</h3>
+        <div class="guide" id="guide-instagram"></div>
+        <h3>Outlook / Microsoft</h3>
+        <div class="guide" id="guide-microsoft"></div>
+      </section>
+
+      <!-- ASSISTANCE (15 €) -->
+      <section class="view" id="view-assistance">
+        <h1>Se faire aider par un technicien FIX72</h1>
+        <p class="muted">Forfait unique <b>15 €</b>. Un technicien se connecte à votre écran (avec votre accord, vous voyez tout) et déroule la récupération avec vous. <b>Sans garantie de résultat</b> — mais on fait vraiment le maximum.</p>
+
+        <div id="assist-idle">
+          <div class="ad-pro-banner">
+            <b>Comment ça se passe :</b> vous remplissez 2-3 infos → paiement sécurisé 15 € → un canal d'assistance chiffré s'ouvre → le technicien vous rappelle / prend la main et travaille avec vous. Vous pouvez tout arrêter à tout moment.
+          </div>
+
+          <div class="ad-form" id="assist-form">
+            <input id="af-name" type="text" placeholder="Votre nom (ex. Marie D.)" />
+            <input id="af-email" type="text" placeholder="E-mail ou identifiant du compte à récupérer" />
+            <select id="af-platform">
+              <option value="facebook">Compte : Facebook</option>
+              <option value="google">Compte : Google / Gmail</option>
+              <option value="instagram">Compte : Instagram</option>
+              <option value="microsoft">Compte : Outlook / Microsoft</option>
+              <option value="autre">Compte : autre</option>
+            </select>
+            <input id="af-phone" type="text" placeholder="Votre téléphone (pour être rappelé)" />
+            <textarea id="af-story" rows="3" placeholder="Que s'est-il passé ? (ex. « je n'arrive plus à me connecter, le mot de passe a été changé »)"></textarea>
+          </div>
+
+          <div class="ad-pay">
+            <div class="ad-total">Forfait unique <b>15 €</b></div>
+            <button class="btn btn-primary" id="btn-pay"><i data-i="card"></i> Payer 15 € et démarrer</button>
+          </div>
+          <div class="ad-note warn" id="assist-note" style="display:none"></div>
+          <p class="muted" style="margin-top:10px">Paiement sécurisé par Stripe (carte bancaire). Aucune donnée bancaire ne transite par cette application.</p>
+        </div>
+
+        <div id="assist-active" style="display:none">
+          <div class="ad-takeover">
+            <span class="ad-takeover-ic"><i data-i="unlock"></i></span>
+            <div class="ad-takeover-txt">
+              <b>Session d'assistance ouverte</b>
+              <p class="muted" id="assist-active-sub">Le technicien FIX72 va prendre la main. Restez sur cet écran, ne l'éteignez pas.</p>
+            </div>
+          </div>
+          <div class="ad-note ok">✅ Tout est prêt. Le technicien a reçu votre demande et peut se connecter. Si personne ne se manifeste sous quelques minutes, appelez le 07 51 13 37 69.</div>
+          <button class="btn btn-danger" id="btn-close-session"><i data-i="close"></i> Terminer la session</button>
+        </div>
+      </section>
+
+      <!-- CHAT -->
+      <section class="view" id="view-chat">
+        <h1>Discuter avec FIX72</h1>
+        <p class="muted">Une question avant de vous lancer ? Écrivez-nous, on répond dès que possible.</p>
+        <div class="chat-box">
+          <div class="chat-head">
+            <div class="chat-ava">F</div>
+            <div class="chat-who"><b>Équipe FIX72</b><small><span class="chat-dot"></span> Répond généralement dans la journée</small></div>
+          </div>
+          <div class="chat-msgs" id="chat-msgs"><div class="empty">Aucun message pour l'instant. Dites-nous tout 👇</div></div>
+          <div class="chat-input-row">
+            <input id="chat-name" type="text" placeholder="Votre prénom" />
+            <textarea id="chat-text" rows="1" placeholder="Votre message…"></textarea>
+            <button class="btn btn-primary" id="chat-send"><i data-i="send"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- À PROPOS -->
+      <section class="view" id="view-about">
+        <div class="about-hero">
+          <img class="about-logo" src="assets/logo.png" alt="" />
+          <div class="about-name">FIX72 <b>Récup Compte</b></div>
+        </div>
+        <p class="muted">Assistance à la récupération de comptes en ligne piratés ou perdus (Facebook, Google, Instagram, Outlook…). Un service FIX72 — dépannage informatique au Mans et à distance.</p>
+        <div class="about-feats">
+          <div class="about-feat"><b>Guides officiels gratuits</b><span>On vous montre les vraies procédures, pas des astuces douteuses.</span></div>
+          <div class="about-feat"><b>Prise en main à distance</b><span>Canal chiffré, vous voyez tout, vous coupez quand vous voulez.</span></div>
+          <div class="about-feat"><b>Forfait clair : 15 €</b><span>Un seul paiement. Sans abonnement, sans surprise.</span></div>
+          <div class="about-feat"><b>Basé en France</b><span>Le Mans (72). Un humain vous répond.</span></div>
+        </div>
+        <h3>Réglages</h3>
+        <div class="setting-row">
+          <div><b>Lancer au démarrage de Windows</b><div class="muted">Garde l'assistance accessible en un clic.</div></div>
+          <label class="switch"><input type="checkbox" id="set-autolaunch"><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div><b>Mises à jour</b><div class="muted">Version <span id="about-ver">—</span></div></div>
+          <button class="btn btn-sm" id="btn-check-update"><i data-i="refresh"></i> Vérifier</button>
+        </div>
+        <p class="muted" style="margin-top:18px;font-size:12px">FIX72 ne vous demandera jamais votre mot de passe par téléphone ou par e-mail. En cas de doute, appelez le 07 51 13 37 69. Ce service aide à récupérer VOS propres comptes via les procédures officielles ; il ne permet pas d'accéder au compte d'autrui.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="toast-wrap" id="toast-wrap"></div>
+  <script src="app.js"></script>
+</body>
+</html>
