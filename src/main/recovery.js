@@ -33,9 +33,9 @@ const license = require('./license');
 // Endpoint principal : fonction Netlify sur fix72.com (clé Stripe déjà en place,
 // même compte que l'antivirus). Repli sur l'Edge Function Supabase puis le lien.
 const NETLIFY_FN = 'https://fix72.com/.netlify/functions/create-recup-checkout';
-const CHECKOUT_FN = 'https://lujumnqloorlbjyffylb.supabase.co/functions/v1/recup-checkout';
+const CHECKOUT_FN = 'https://juqxtwqwzhtermlesoaj.supabase.co/functions/v1/recup-checkout';
 const CHECKOUT_ANON =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1anVtbnFsb29ybGJqeWZmeWxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNDE2NTcsImV4cCI6MjA5MDkxNzY1N30.MWc-mW777_Jcd4-Nk3chmrkNK7upS4olIo-OXVEBwTU';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1cXh0d3F3emh0ZXJtbGVzb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2MjUxMTksImV4cCI6MjA5MzIwMTExOX0.gQWLqJTO4WpOBAIZbui5U81XW6DSdLWzS81u-JF3WsQ';
 
 // ⚠️ Repli : lien de paiement Stripe 15 € (laisser tel quel si on utilise (A)).
 const PAYMENT_LINK = 'https://buy.stripe.com/REMPLACER_PAR_LE_LIEN_15E';

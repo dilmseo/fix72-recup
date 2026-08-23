@@ -16,9 +16,9 @@ const assistance = require('./assistance');
 const tunnels = require('./tunnels');
 
 // Projet ordi-facile (même base que présence/broadcast). Clé anon publique.
-const SUPABASE_URL = 'https://lujumnqloorlbjyffylb.supabase.co';
+const SUPABASE_URL = 'https://juqxtwqwzhtermlesoaj.supabase.co';
 const ANON =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1anVtbnFsb29ybGJqeWZmeWxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNDE2NTcsImV4cCI6MjA5MDkxNzY1N30.MWc-mW777_Jcd4-Nk3chmrkNK7upS4olIo-OXVEBwTU';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1cXh0d3F3emh0ZXJtbGVzb2FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2MjUxMTksImV4cCI6MjA5MzIwMTExOX0.gQWLqJTO4WpOBAIZbui5U81XW6DSdLWzS81u-JF3WsQ';
 
 const INTERVAL_MS = 12 * 1000; // latence max ~12 s
 let busy = false;              // évite d'empiler deux ouvertures
