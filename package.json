@@ -1,13 +1,14 @@
 {
   "name": "fix72-recup",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "FIX72 Récup Compte - assistance à la récupération de comptes Facebook / Google piratés (prise en main à distance).",
   "author": "FIX72",
   "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder --win",
-    "pack": "electron-builder --dir"
+    "pack": "electron-builder --dir",
+    "publish": "node scripts/publish.js"
   },
   "devDependencies": {
     "electron": "^31.0.0",
@@ -29,11 +30,19 @@
     ],
     "win": {
       "target": [
-        { "target": "nsis", "arch": ["x64"] }
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
       ],
       "requestedExecutionLevel": "requireAdministrator",
       "icon": "build/icon.ico",
-      "publisherName": ["FIX72", "Etienne Aubry"]
+      "publisherName": [
+        "FIX72",
+        "Etienne Aubry"
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -45,7 +54,12 @@
       "include": "build/installer.nsh"
     },
     "publish": [
-      { "provider": "github", "owner": "dilmseo", "repo": "fix72-recup", "releaseType": "release" }
+      {
+        "provider": "github",
+        "owner": "dilmseo",
+        "repo": "fix72-recup",
+        "releaseType": "release"
+      }
     ]
   },
   "dependencies": {
